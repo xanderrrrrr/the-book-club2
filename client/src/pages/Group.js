@@ -75,7 +75,7 @@ class Group extends Component {
             </button>
           </div>
         </div>
-        <div className="groups-go-here">
+        <div className="groups-go-here rounded-lg border-blue-500">
         {this.state.groups.length ? (
               <List>
                 {this.state.groups.map(group => (
@@ -87,7 +87,7 @@ class Group extends Component {
                         Group Name: {group.name}
                       </strong>
                     </a>
-                    <div className="flex items-center justify-center">
+                    <div className="flex items-center justify-left">
                     <div className="m-3">
                       <button className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
                       onClick={() => this.deleteGroup(group._id)}>
