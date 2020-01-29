@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "./components/Navbar/NavBar";
 import Group from "./pages/Group";
 import Homepage from "./pages/Homepage";
+import GroupDetails from "./pages/GroupDetails";
 // import Testing from "./components/Testing/Testing";
 // I don't need to test the tailwind css properties right now
 
@@ -27,6 +28,7 @@ function App() {
           </Route>
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/group" component={Group} />
+          <PrivateRoute exact path="/groups/:id" component={GroupDetails} />
         </Switch>
         </div>
       </Router>
