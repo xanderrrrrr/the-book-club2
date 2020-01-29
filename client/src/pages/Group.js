@@ -22,8 +22,28 @@ class Group extends Component {
   deleteGroup = id => {
     API.deleteGroup(id)
       // .then(res => this.loadGroups())
-      .catch(err => console.log(err));
+      // if I have `then` it won't delete it
+      .catch(err => console.log("error is: " + err));
       console.log("did I hit delete group? ID =" + id);
+  };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    console.log("you hit submit");
+    if (this.state.name) {
+      API.saveGroup({
+        name: this.state.name,
+      })
+        .then(res => this.loadGroups())
+        .catch(err => console.log(err));
+    }
+  };
+
+  handleInputChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
   };
 
   render() {
@@ -41,14 +61,16 @@ class Group extends Component {
             </label>
           </div>
           <div className="md:w-2/3">
-            <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-username" type="text" placeholder="group name"/>
+            <input className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500" id="inline-username" type="text" placeholder="group name"
+            value={this.state.name} name="name" onChange={this.handleInputChange}/>
           </div>
         </div>
 
         <div className="md:flex md:items-center">
           <div className="md:w-1/3"></div>
           <div className="md:w-2/3">
-            <button className="shadow bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit">
+            <button className="shadow bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit" 
+               disabled={!(this.state.name)} onClick={this.handleFormSubmit}>
               Submit
             </button>
           </div>
