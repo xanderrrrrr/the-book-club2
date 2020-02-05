@@ -17,7 +17,8 @@ module.exports = {
     },
     findByGroup: function(req, res) {
         db.Member
-        .findById(req.params._groupId)
+        .find()
+        .where("_groupId",req.params.id)
         .then(dbModel => res.json(dbModel))
         .catch(err => res.status(422).json(err));
     },

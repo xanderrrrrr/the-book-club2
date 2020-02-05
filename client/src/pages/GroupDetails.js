@@ -8,6 +8,16 @@ class GroupDetails extends Component {
     group: {},
     members: {}
   };
+
+  // get my route working
+  // on backend: set up route so I can query db and get members
+  // either query the group and populate members, or query members with groupId
+
+  // then I can do an axios call to grab my groupId, send it to backend
+  // and get a response.
+  // then I can work on getting it on the screen
+
+
   // When this component mounts, grab the group with the _id of this.props.match.params.id
   // e.g. localhost:3000/group/5234
   componentDidMount() {
@@ -18,7 +28,7 @@ class GroupDetails extends Component {
   }
 
   loadMembers = () => { 
-    API.getMembers()
+    API.getMember(this.props.match.params.id)
     .then(res => this.setState({ members: res.data}))
     .catch(err => console.log(err));
   }

@@ -25,7 +25,6 @@ export default {
   // test to get specific members
   getMember: function(groupID) {
     return axios.get("/api/members/" + groupID)
-
   },
   // test to save member
   saveMember: function(memberData) {
