@@ -64,7 +64,7 @@ class GroupDetails extends Component {
   render() {
 
     return (
-        <div className="w-full max-w-sm">
+        <div className="w-full max-w-sm container">
             <h1>
                 Group Name: 
                 <strong>{this.state.group.name}</strong>
@@ -72,7 +72,7 @@ class GroupDetails extends Component {
             <p>
                 This is where I will have the user input group members
             </p>
-            <div>
+            <div className="">
                 <form className="m-4 flex">
                     <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="member name" type="text"
                     value={this.state.name} name="name" onChange={this.handleInputChange}/>
@@ -80,7 +80,7 @@ class GroupDetails extends Component {
                     disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Go</button>
                 </form>
             </div>
-            <div className="members-go-here rounded-lg border-blue-500">
+            <div id="members-go-here" className="rounded-lg border-blue-500 inline-block">
             {this.state.members.length ? (
               <List>
                 {this.state.members.map(member => (
@@ -109,12 +109,11 @@ class GroupDetails extends Component {
             ) : (
               <h3>No Results to Display</h3>
             )}
-
             </div>
-            <div className="book-club-details-go-here">
+            
+            <div id="book-club-details-go-here" className="inline-block">
               <p>Test for new div</p>
             </div>
-
 
             <Link to="/group">
             <div className="flex items-center justify-left">
