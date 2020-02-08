@@ -12,5 +12,5 @@ export function List({ children }) {
 }
 
 export function ListItem({ children }) {
-  return <li className="list-group-item rounded-lg border-blue-500 border my-4 py-1">{children}</li>;
+  return <li className="list-group-item rounded-lg border-blue-500 border my-4 py-1 w-60">{children}</li>;
 }
