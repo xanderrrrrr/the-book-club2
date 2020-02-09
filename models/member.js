@@ -10,6 +10,13 @@ var memberSchema = new Schema({
   name: { 
     type: String,
     required: true 
+  }, 
+  // `book` is an object that stores unique books
+  // The ref property links the ObjectId to the Books model
+  // This allows us to populate the Member with associated books
+  book: {
+    type: Schema.Types.ObjectId,
+    ref: "Book"
   }
 });
 

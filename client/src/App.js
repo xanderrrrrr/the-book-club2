@@ -11,6 +11,7 @@ import { Router, Route, Switch } from "react-router-dom";
 import Profile from "./components/Profile/Profile";
 import history from "./utils/history";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
+import MemberDetails from "./pages/MemberDetails";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <PrivateRoute path="/profile" component={Profile} />
           <PrivateRoute path="/group" component={Group} />
           <PrivateRoute exact path="/groups/:id" component={GroupDetails} />
+          <PrivateRoute exact path="/members/:id" component={MemberDetails} />
         </Switch>
         </div>
       </Router>

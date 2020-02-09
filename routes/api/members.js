@@ -10,8 +10,12 @@ router.route("/")
 router
   .route("/:id")
   .get(memberController.findByGroup)
+  // .get(memberController.findById)
   .put(memberController.update)
   .delete(memberController.remove);
+
+  router.route("/member/:id")
+  .get(memberController.findById)
 
 
 module.exports = router;

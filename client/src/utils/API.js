@@ -26,6 +26,10 @@ export default {
   getMember: function(groupID) {
     return axios.get("/api/members/" + groupID)
   },
+  // this is to get specific members since the one above returns members per groupID
+  getSpecificMember: function(id) {
+    return axios.get("/api/members/member/" + id)
+  },
   // test to save member
   saveMember: function(memberData) {
     return axios.post("/api/members", memberData)
@@ -33,5 +37,21 @@ export default {
   // test to delete member
   deleteMember: function(id) {
     return axios.delete("/api/members/" + id);
+  },
+  // separating book from the rest ~_~_~_~~_~_~_~_~~_
+  getBooks: function() {
+    return axios.get("/api/books")
+  },
+  getBook: function(bookID) {
+    return axios.get("/api/books/", bookID)
+  },
+  saveBook: function(bookData) {
+    return axios.post("/api/books", bookData)
+  },
+  deleteBook: function(id) {
+    return axios.delete("/api/books/" + id)
+  },
+  getBooksByMember: function(id) {
+    return axios.get("/api/books/member/" + id)
   }
 };
