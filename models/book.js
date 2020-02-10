@@ -32,6 +32,9 @@ var bookSchema = new Schema({
     created: {
         type: Date, 
         default: Date.now
+    },
+    meetUpDate: {
+        type: Date
     }
 });
 

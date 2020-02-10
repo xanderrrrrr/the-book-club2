@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
 import { List, ListItem} from "../components/List/List";
+import moment from "moment";
 
 class MemberDetails extends Component {
   state = {
@@ -17,12 +18,19 @@ class MemberDetails extends Component {
       .then(res => this.setState({ members: res.data.name }))
       .catch(err => console.log("error is" + err));
       this.loadBooks();
-      this.howManyPages();
+      
   }
 
   loadBooks = () => { 
     API.getBooksByMember(this.props.match.params.id)
-    .then(res => this.setState({ book: res.data}))
+    .then(res => this.setState({ book: res.data.filter(book => {
+
+      var firstTimeConverted = moment(book.meetUpDate).add(1, "day");
+      var diffTime = moment().diff(moment(firstTimeConverted), "days");
+      return diffTime <= 0 
+
+    })}))
+    .then(res => this.howManyPages(this.state.book))
     .catch(err => console.log(err));
   }
 
@@ -42,7 +50,8 @@ class MemberDetails extends Component {
         title: this.state.name,
         author: this.state.author,
         textDuration: this.state.textDuration,
-        audioDuration: this.state.audioDuration
+        audioDuration: this.state.audioDuration,
+        meetUpDate: this.state.meetUpDate
       })
         .then(res => this.loadBooks())
         .then(console.log("this is after saving book"))
@@ -57,8 +66,30 @@ class MemberDetails extends Component {
     });
   };
 
-  howManyPages = () => {
-    console.log("this is hittig the function how many pages")
+  howManyPages = (date, time) => {
+    // console.log("books from state are " + JSON.stringify(booksFromState))
+
+    // booksFromState.forEach(element => {
+    //   // console.log("foreach loop + " + element._id)
+    //   console.log("foraeach loop + " + element.meetUpDate)
+    //   var firstTimeConverted = moment(element.meetUpDate).add(1, "day");
+    //   var diffTime = moment().diff(moment(firstTimeConverted), "days");
+    //   console.log("difftime: " + diffTime)
+
+    //   var absVal = Math.abs(diffTime)
+
+    //   var mathing = element.audioDuration / absVal;
+    //   console.log('mathing' +  Math.ceil(mathing));
+
+    // });
+
+      var firstTimeConverted = moment(date).add(1, "day");
+      var diffTime = moment().diff(moment(firstTimeConverted), "days");
+
+      var absVal = Math.abs(diffTime)
+      var mathing = time / absVal;
+    return <p>{absVal}<br></br>{Math.ceil(mathing)}</p>
+
   }
   
     render() {
@@ -86,6 +117,9 @@ class MemberDetails extends Component {
               {/* book textDuration */}
               <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="text duration" type="text"
               value={this.state.textDuration} name="textDuration" onChange={this.handleInputChange}/>
+              {/* book next meetup date */}
+<             input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="01/01/2020" type="date"
+              value={this.state.meetUpDate} name="meetUpDate" onChange={this.handleInputChange}/>
 
 
               <button className="px-8 rounded-r-lg bg-green-400  text-gray-800 font-bold p-4 uppercase border-green-500 border-t border-b border-r" type="submit"
@@ -103,6 +137,7 @@ class MemberDetails extends Component {
                         book ID: {book._id}
                         <br/>
                         book Name: {book.title}
+                        {this.howManyPages(book.meetUpDate, book.audioDuration)}
                       </strong>
                     {/* </a> */}
 
