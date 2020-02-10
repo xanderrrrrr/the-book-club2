@@ -197,17 +197,17 @@ function toggleModal () {
           <div className="-mx-3 md:flex mb-8">
             <div className="md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-minutes-left">
-                Minutes
+                Minutes*
               </label>
               <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-minutes-left" type="number" placeholder="540"
               value={this.state.audioDuration} name="audioDuration" onChange={this.handleInputChange}/>
               <div className="absolute">
-              <p className="text-grey-dark text-xs italic">Only one of min left/pages left is required</p>
+              <p className="text-grey-dark text-xs italic">*Enter either Minutes or Pages</p>
               </div>
             </div>
             <div className="md:w-1/2 px-3">
               <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-pages-left">
-                Pages
+                Pages*
               </label>
                 <input className="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-pages-left" type="number" placeholder="300"
                 value={this.state.textDuration} name="textDuration" onChange={this.handleInputChange}/>
