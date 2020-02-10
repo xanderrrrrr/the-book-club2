@@ -50,7 +50,7 @@ class Group extends Component {
   render() {
     return (
         <div className="w-full max-w-lg container">
-          <h1>Here you can enter your Book Club Groups!</h1>
+          <h1>Welcome! Here you can enter your Book Club Groups</h1>
           <div className="">
             <form className="m-4 flex">
               <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" id="inline-username" type="text" placeholder="group name"

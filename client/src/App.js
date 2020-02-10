@@ -14,6 +14,10 @@ import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import MemberDetails from "./pages/MemberDetails";
 
 function App() {
+
+  const blackBG = {
+    backgroundColor: '#000000'
+  }
   return (
     <div className="App container">
       {/* Don't forget to include the history module */}
@@ -34,7 +38,7 @@ function App() {
         </Switch>
         </div>
       </Router>
-      <h1>Welcome to The Book Club -- I also need to add a footer, but it's currently on App.js</h1>
+      <h1 className="text-white">Welcome to The Book Club</h1>
     </div>
   );
 }
