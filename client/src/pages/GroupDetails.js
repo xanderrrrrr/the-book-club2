@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
-import { List, ListItem} from "../components/List/List";
+// import { List, ListItem} from "../components/List/List";
+import { Card } from "../components/Card/Card";
 
 class GroupDetails extends Component {
   state = {
@@ -70,31 +71,27 @@ class GroupDetails extends Component {
                 <strong>{this.state.group.name}</strong>
             </h1>
             <p>
-                This is where I will have the user input group members
+                Enter your book club members
             </p>
             <div className="">
                 <form className="m-4 flex">
-                    <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="member name" type="text"
+                    <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="member name" type="text"
                     value={this.state.name} name="name" onChange={this.handleInputChange}/>
-                    <button className="px-8 rounded-r-lg bg-green-400  text-gray-800 font-bold p-4 uppercase border-green-500 border-t border-b border-r" type="submit"
-                    disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Go</button>
+                    <button className="shadow bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit"
+                    disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Submit</button>
                 </form>
             </div>
-            <div id="members-go-here" className="rounded-lg border-blue-500 inline-block">
+            <div id="members-go-here">
             {this.state.members.length ? (
-              <List>
+              <>
                 {this.state.members.map(member => (
-                  <ListItem key={member._id}>
-                    <a href={"/members/" + member._id}>
-                      <strong>
-                        member ID: {member._id}
-                        <br/>
-                        member Name: {member.name}
-                      </strong>
+                  <Card key={member._id}>
+                    <a href={"/members/" + member._id} className="font-bold text-xl ">
+                      {member.name}
                     </a>
                     <div className="flex items-center justify-left">
                     <div className="m-3">
-                      <button className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+                      <button className="bg-white text-gray-800 rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center font-bold"
                       onClick={() => this.deleteMember(member._id)}>
                         <span className="mr-2">Delete</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -103,9 +100,9 @@ class GroupDetails extends Component {
                         </button>
                       </div>
                     </div>
-                  </ListItem>
+                  </Card>
                 ))}
-              </List>
+              </>
             ) : (
               <h3>No Results to Display</h3>
             )}
