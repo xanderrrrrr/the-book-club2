@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../utils/API";
-import { List, ListItem} from "../components/List/List";
+// import { List, ListItem} from "../components/List/List";
 import moment from "moment";
+import { Card } from "../components/Card/Card";
 
 class MemberDetails extends Component {
   state = {
@@ -101,9 +102,9 @@ class MemberDetails extends Component {
   }
   
     render() {
-  
       return (
         <div className="w-full max-w-lg container">
+          <h1>Here you can enter your books!</h1>
         <h1>
             Member Name: 
             <strong>{this.state.members}</strong>
@@ -114,44 +115,41 @@ class MemberDetails extends Component {
         <div className="">
             <form className="m-4 flex">
               {/* book name */}
-              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="book title" type="text"
+              <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="book title" type="text"
               value={this.state.name} name="name" onChange={this.handleInputChange}/>
               {/* book author */}
-              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="book author" type="text"
+              <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="book author" type="text"
               value={this.state.author} name="author" onChange={this.handleInputChange}/>
               {/* book audioDuration */}
-              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="minutes left" type="text"
+              <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="minutes left" type="text"
               value={this.state.audioDuration} name="audioDuration" onChange={this.handleInputChange}/>
               {/* book textDuration */}
-              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="pages left" type="text"
+              <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="pages left" type="text"
               value={this.state.textDuration} name="textDuration" onChange={this.handleInputChange}/>
               {/* book next meetup date */}
-<             input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="01/01/2020" type="date"
+              <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="01/01/2020" type="date"
               value={this.state.meetUpDate} name="meetUpDate" onChange={this.handleInputChange}/>
-
-
-              <button className="px-8 rounded-r-lg bg-green-400  text-gray-800 font-bold p-4 uppercase border-green-500 border-t border-b border-r" type="submit"
-              disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Go</button>
+              {/* submit button */}
+              <button className="shadow bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit"
+              disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Submit</button>
             </form>
         </div>
 
-        <div id="books-go-here" className="rounded-lg border-blue-500 inline-block flex mb-4">
+        <div id="books-go-here">
             {this.state.book.length ? (
-              <List>
+              <>
                 {this.state.book.map(book => (
-                  <ListItem key={book._id}>
+                  <Card key={book._id}>
                     {/* <a href={"/books/" + book._id}> */}
-                      <strong>
-                        book ID: {book._id}
-                        <br/>
-                        book Name: {book.title}
+                      <div className="font-bold-text-xl">
+                        Title: <strong>{book.title}</strong>
                         {book.audioDuration ? this.howManyPages(book.meetUpDate, book.audioDuration, "audio") : this.howManyPages(book.meetUpDate, book.textDuration, "text")}
-                      </strong>
+                      </div>
                     {/* </a> */}
 
-                    <div className="flex items-center justify-left">
+                    <div className="flex items-center justify-center">
                     <div className="m-3">
-                      <button className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
+                      <button className="bg-white text-gray-800 rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center font-bold"
                       onClick={() => this.deleteBook(book._id)}>
                         <span className="mr-2">Delete</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -161,9 +159,9 @@ class MemberDetails extends Component {
                       </div>
   
                     </div>
-                  </ListItem>
+                  </Card>
                 ))}
-              </List>
+              </>
             ) : (
               <h3>No Results to Display</h3>
             )}

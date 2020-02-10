@@ -89,7 +89,7 @@ class GroupDetails extends Component {
                     <a href={"/members/" + member._id} className="font-bold text-xl ">
                       {member.name}
                     </a>
-                    <div className="flex items-center justify-left">
+                    <div className="flex items-center justify-center">
                     <div className="m-3">
                       <button className="bg-white text-gray-800 rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center font-bold"
                       onClick={() => this.deleteMember(member._id)}>
