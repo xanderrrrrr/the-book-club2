@@ -109,9 +109,6 @@ class MemberDetails extends Component {
             Member Name: 
             <strong>{this.state.members.name}</strong>
         </h1>
-        <p>
-            Enter your book. Only one of minutes left/pages left is required:
-        </p>
 
 
         <div className="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4 flex flex-col my-2">
@@ -139,7 +136,7 @@ class MemberDetails extends Component {
               <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-minutes-left" type="number" placeholder="540"
               value={this.state.audioDuration} name="audioDuration" onChange={this.handleInputChange}/>
               <div className="absolute">
-              <p className="text-grey-dark text-xs italic">Only one of minutes left/pages left is required</p>
+              <p className="text-grey-dark text-xs italic">Only one of min left/pages left is required</p>
               </div>
             </div>
             <div className="md:w-1/2 px-3">
