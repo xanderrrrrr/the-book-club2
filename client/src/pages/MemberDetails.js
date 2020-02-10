@@ -19,6 +19,45 @@ class MemberDetails extends Component {
       .then(res => this.setState({ members: res.data }))
       .catch(err => console.log("error is" + err));
       this.loadBooks();
+
+      var openmodal = document.querySelectorAll('.modal-open')
+for (var i = 0; i < openmodal.length; i++) {
+  openmodal[i].addEventListener('click', function(event){
+    event.preventDefault()
+    toggleModal()
+  })
+}
+
+const overlay = document.querySelector('.modal-overlay')
+overlay.addEventListener('click', toggleModal)
+
+var closemodal = document.querySelectorAll('.modal-close')
+for (var i = 0; i < closemodal.length; i++) {
+  closemodal[i].addEventListener('click', toggleModal)
+}
+
+document.onkeydown = function(evt) {
+  evt = evt || window.event
+  var isEscape = false
+  if ("key" in evt) {
+    isEscape = (evt.key === "Escape" || evt.key === "Esc")
+  } else {
+    isEscape = (evt.keyCode === 27)
+  }
+  if (isEscape && document.body.classList.contains('modal-active')) {
+    toggleModal()
+  }
+};
+
+
+function toggleModal () {
+  const body = document.querySelector('body')
+  const modal = document.querySelector('.modal')
+  modal.classList.toggle('opacity-0')
+  modal.classList.toggle('pointer-events-none')
+  body.classList.toggle('modal-active')
+}
+
       
   }
 
@@ -103,15 +142,106 @@ class MemberDetails extends Component {
   
     render() {
       return (
-        <div className="w-full max-w-lg container">
+        <div className="w-full max-w-lg">
           <h1>Here you can enter your books!</h1>
         <h1>
             Member Name: 
             <strong>{this.state.members.name}</strong>
         </h1>
 
+        <button className="modal-open bg-transparent border border-gray-500 hover:border-blue-700 text-gray-500 hover:text-blue-700 font-bold py-2 px-4 rounded-lg">Click to add book</button>
+  
+  {/* <!--Modal--> */}
+  <div className="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+    
+    <div className="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+      
+      <div className="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
+        <svg className="fill-current text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+          <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+        </svg>
+        <span className="text-sm">(Esc)</span>
+      </div>
 
-        <div className="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4 flex flex-col my-2">
+      {/* <!-- Add margin if you want to see some of the overlay behind the modal--> */}
+      <div className="modal-content py-4 text-left px-6">
+        {/* <!--Title--> */}
+        <div className="flex justify-between items-center pb-3">
+          <p className="text-2xl font-bold">Enter your book here</p>
+          <div className="modal-close cursor-pointer z-50">
+            <svg className="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+            </svg>
+          </div>
+        </div>
+
+        {/* <!--Body--> */}
+        <div className="">
+          <div className="-mx-3 md:flex mb-2">
+            <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-title">
+                Book Title
+              </label>
+              <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-title" type="text" placeholder="Ulysses" 
+              value={this.state.name} name="name" onChange={this.handleInputChange}/>
+            </div>
+            <div className="md:w-1/2 px-3">
+              <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-author">
+                Book Author
+              </label>
+              <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-author" type="text" placeholder="James Joyce"
+              value={this.state.author} name="author" onChange={this.handleInputChange}/>
+            </div>
+          </div>
+          <div className="-mx-3 md:flex mb-8">
+            <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-minutes-left">
+                Minutes
+              </label>
+              <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-minutes-left" type="number" placeholder="540"
+              value={this.state.audioDuration} name="audioDuration" onChange={this.handleInputChange}/>
+              <div className="absolute">
+              <p className="text-grey-dark text-xs italic">Only one of min left/pages left is required</p>
+              </div>
+            </div>
+            <div className="md:w-1/2 px-3">
+              <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-pages-left">
+                Pages
+              </label>
+                <input className="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-pages-left" type="number" placeholder="300"
+                value={this.state.textDuration} name="textDuration" onChange={this.handleInputChange}/>
+            </div>
+            <div className="md:w-1/2 px-3">
+              <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-next-meetup">
+                Meetup
+              </label>
+              <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-next-meetup" type="date" placeholder="90210"
+              value={this.state.meetUpDate} name="meetUpDate" onChange={this.handleInputChange}/>
+            </div>
+          </div>
+          {/* <div className="-mx-3 md:flex mb-6">
+            <div className="md:w-full px-3 text-center">
+            <button className="shadow bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit"
+              disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Submit</button>
+            </div>
+          </div> */}
+        </div>
+
+        {/* <!--Footer--> */}
+        <div className="flex justify-end pt-2">
+          <button className="modal-close px-4 bg-transparent p-3 rounded-lg text-blue-700 hover:bg-gray-100 hover:text-indigo-400 mr-2" type="submit"
+              disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Submit</button>
+          <button className="modal-close px-4 bg-indigo-500 p-3 rounded-lg text-white hover:bg-indigo-400">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+        
+
+
+        {/* <div className="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4 flex flex-col my-2">
           <div className="-mx-3 md:flex mb-2">
             <div className="md:w-1/2 px-3 mb-6 md:mb-0">
               <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-title">
@@ -160,18 +290,11 @@ class MemberDetails extends Component {
               disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Submit</button>
             </div>
           </div>
-        </div>
+        </div> */}
 
 
 
-
-
-
-
-
-
-
-        <div id="books-go-here">
+          <div className="">
             {this.state.book.length ? (
               <>
                 {this.state.book.map(book => (

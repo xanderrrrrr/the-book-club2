@@ -19,7 +19,7 @@ function App() {
     backgroundColor: '#000000'
   }
   return (
-    <div className="App container">
+    <div className="App">
       {/* Don't forget to include the history module */}
       <Router history={history}>
         <div>
