@@ -66,7 +66,7 @@ class MemberDetails extends Component {
     });
   };
 
-  howManyPages = (date, time) => {
+  howManyPages = (date, time, audioOrText) => {
     // console.log("books from state are " + JSON.stringify(booksFromState))
 
     // booksFromState.forEach(element => {
@@ -88,20 +88,28 @@ class MemberDetails extends Component {
 
       var absVal = Math.abs(diffTime)
       var mathing = time / absVal;
-    return <p>{absVal}<br></br>{Math.ceil(mathing)}</p>
+
+      switch (audioOrText) {
+        case "audio":
+          return <p>Days until meetup: {absVal}<br></br>Minutes per day: {Math.ceil(mathing)}</p>
+        case "text":
+          return <p>Days until meetup: {absVal}<br></br>Pages per day: {Math.ceil(mathing)}</p>
+        default:
+          return <p>Days until meetup: {absVal}<br></br>Default per day: {Math.ceil(mathing)}</p>
+      }
 
   }
   
     render() {
   
       return (
-        <div className="w-full max-w-sm container">
+        <div className="w-full max-w-lg container">
         <h1>
             Member Name: 
             <strong>{this.state.members}</strong>
         </h1>
         <p>
-            This is where I will have the user input books
+            Enter your book. Only one of minutes left/pages left is required:
         </p>
         <div className="">
             <form className="m-4 flex">
@@ -112,10 +120,10 @@ class MemberDetails extends Component {
               <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="book author" type="text"
               value={this.state.author} name="author" onChange={this.handleInputChange}/>
               {/* book audioDuration */}
-              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="audio duration" type="text"
+              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="minutes left" type="text"
               value={this.state.audioDuration} name="audioDuration" onChange={this.handleInputChange}/>
               {/* book textDuration */}
-              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="text duration" type="text"
+              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="pages left" type="text"
               value={this.state.textDuration} name="textDuration" onChange={this.handleInputChange}/>
               {/* book next meetup date */}
 <             input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="01/01/2020" type="date"
@@ -137,7 +145,7 @@ class MemberDetails extends Component {
                         book ID: {book._id}
                         <br/>
                         book Name: {book.title}
-                        {this.howManyPages(book.meetUpDate, book.audioDuration)}
+                        {book.audioDuration ? this.howManyPages(book.meetUpDate, book.audioDuration, "audio") : this.howManyPages(book.meetUpDate, book.textDuration, "text")}
                       </strong>
                     {/* </a> */}
 
