@@ -114,7 +114,7 @@ class GroupDetails extends Component {
             </div> */}
 
             <Link to="/group">
-            <div className="flex items-center justify-left">
+            <div className="flex items-center justify-left mb-12">
                 <div className="m-3">
                     <button className="bg-white text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
                     <span className="mr-2">← Back</span>

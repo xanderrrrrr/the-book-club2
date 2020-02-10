@@ -68,7 +68,7 @@ const NavBar = () => {
     <h1 className="text-3xl text-center"></h1>
   </main>
   <div className="bottomNav fixed bottom-0 w-full">
-    <nav style={{border: "1px solid blue"}} className="md:hidden bottom-0 w-full bg-gray-700 text-xs">
+    <nav style={{border: "1px solid black"}} className="md:hidden bottom-0 w-full bg-gray-700 text-xs">
       <ul className="flex justify-around items-center text-white text-center opacity-75 text-lg font-bold">
 
         {isAuthenticated && (
