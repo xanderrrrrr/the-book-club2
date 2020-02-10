@@ -7,7 +7,7 @@ import { Card } from "../components/Card/Card";
 
 class MemberDetails extends Component {
   state = {
-    members: "",
+    members: [],
     book: {}
   };
 
@@ -16,7 +16,7 @@ class MemberDetails extends Component {
   componentDidMount() {
     // console.log("res data: " + this.props.match.params.id)
     API.getSpecificMember(this.props.match.params.id)
-      .then(res => this.setState({ members: res.data.name }))
+      .then(res => this.setState({ members: res.data }))
       .catch(err => console.log("error is" + err));
       this.loadBooks();
       
@@ -107,7 +107,7 @@ class MemberDetails extends Component {
           <h1>Here you can enter your books!</h1>
         <h1>
             Member Name: 
-            <strong>{this.state.members}</strong>
+            <strong>{this.state.members.name}</strong>
         </h1>
         <p>
             Enter your book. Only one of minutes left/pages left is required:
@@ -173,11 +173,11 @@ class MemberDetails extends Component {
             </div> */}
 
 
-            <Link to="/group">
+            <Link to={"/groups/" + this.state.members._groupId}>
             <div className="flex items-center justify-left">
                 <div className="m-3">
                     <button className="bg-white text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center">
-                    <span className="mr-2">← Back to Groups</span>
+                    <span className="mr-2">← Back</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                         
                     </svg>
