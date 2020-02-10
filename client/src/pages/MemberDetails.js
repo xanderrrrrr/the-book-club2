@@ -112,28 +112,67 @@ class MemberDetails extends Component {
         <p>
             Enter your book. Only one of minutes left/pages left is required:
         </p>
-        <div className="">
-            <form className="m-4 flex">
-              {/* book name */}
-              <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="book title" type="text"
+
+
+        <div className="bg-white shadow-md rounded px-8 pt-6 pb-4 mb-4 flex flex-col my-2">
+          <div className="-mx-3 md:flex mb-2">
+            <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-title">
+                Book Title
+              </label>
+              <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3" id="grid-title" type="text" placeholder="Ulysses" 
               value={this.state.name} name="name" onChange={this.handleInputChange}/>
-              {/* book author */}
-              <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="book author" type="text"
+            </div>
+            <div className="md:w-1/2 px-3">
+              <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-author">
+                Book Author
+              </label>
+              <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-author" type="text" placeholder="James Joyce"
               value={this.state.author} name="author" onChange={this.handleInputChange}/>
-              {/* book audioDuration */}
-              <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="minutes left" type="text"
+            </div>
+          </div>
+          <div className="-mx-3 md:flex mb-8">
+            <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+              <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-minutes-left">
+                Min Left
+              </label>
+              <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-minutes-left" type="number" placeholder="540"
               value={this.state.audioDuration} name="audioDuration" onChange={this.handleInputChange}/>
-              {/* book textDuration */}
-              <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="pages left" type="text"
-              value={this.state.textDuration} name="textDuration" onChange={this.handleInputChange}/>
-              {/* book next meetup date */}
-              <input className="rounded-l-lg p-2 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="01/01/2020" type="date"
+              <div className="absolute">
+              <p className="text-grey-dark text-xs italic">Only one of minutes left/pages left is required</p>
+              </div>
+            </div>
+            <div className="md:w-1/2 px-3">
+              <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-pages-left">
+                Pages Left
+              </label>
+                <input className="block appearance-none w-full bg-grey-lighter border border-grey-lighter text-grey-darker py-3 px-4 pr-8 rounded" id="grid-pages-left" type="number" placeholder="300"
+                value={this.state.textDuration} name="textDuration" onChange={this.handleInputChange}/>
+            </div>
+            <div className="md:w-1/2 px-3">
+              <label className="block tracking-wide text-grey-darker font-bold mb-2" for="grid-next-meetup">
+                Meetup
+              </label>
+              <input className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-grey-lighter rounded py-3 px-4" id="grid-next-meetup" type="date" placeholder="90210"
               value={this.state.meetUpDate} name="meetUpDate" onChange={this.handleInputChange}/>
-              {/* submit button */}
-              <button className="shadow bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit"
+            </div>
+          </div>
+          <div className="-mx-3 md:flex mb-6">
+            <div className="md:w-full px-3 text-center">
+            <button className="shadow bg-blue-500 hover:bg-blue-700 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="submit"
               disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Submit</button>
-            </form>
+            </div>
+          </div>
         </div>
+
+
+
+
+
+
+
+
+
 
         <div id="books-go-here">
             {this.state.book.length ? (
