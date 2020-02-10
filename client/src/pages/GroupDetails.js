@@ -64,7 +64,7 @@ class GroupDetails extends Component {
   render() {
 
     return (
-        <div className="w-full max-w-sm container">
+        <div className="w-full max-w-lg container">
             <h1>
                 Group Name: 
                 <strong>{this.state.group.name}</strong>
@@ -111,9 +111,10 @@ class GroupDetails extends Component {
             )}
             </div>
             
-            <div id="book-club-details-go-here" className="inline-block">
-              <p>Test for new div</p>
-            </div>
+            {/* <div id="book-club-details-go-here" className="inline-block">
+              <p>How often does the group meet?</p>
+              <p id="next-meetup-goes-here"></p>
+            </div> */}
 
             <Link to="/group">
             <div className="flex items-center justify-left">
