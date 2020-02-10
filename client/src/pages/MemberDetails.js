@@ -14,9 +14,10 @@ class MemberDetails extends Component {
   componentDidMount() {
     // console.log("res data: " + this.props.match.params.id)
     API.getSpecificMember(this.props.match.params.id)
-      .then(res => this.setState({ members: res.data._id }))
+      .then(res => this.setState({ members: res.data.name }))
       .catch(err => console.log("error is" + err));
       this.loadBooks();
+      this.howManyPages();
   }
 
   loadBooks = () => { 
@@ -37,8 +38,11 @@ class MemberDetails extends Component {
     console.log("you hit submit");
     if (this.state.name) {
       API.saveBook({
-        _memberId: this.state.members,
-        title: this.state.name
+        _memberId: this.props.match.params.id,
+        title: this.state.name,
+        author: this.state.author,
+        textDuration: this.state.textDuration,
+        audioDuration: this.state.audioDuration
       })
         .then(res => this.loadBooks())
         .then(console.log("this is after saving book"))
@@ -52,6 +56,10 @@ class MemberDetails extends Component {
       [name]: value
     });
   };
+
+  howManyPages = () => {
+    console.log("this is hittig the function how many pages")
+  }
   
     render() {
   
@@ -66,25 +74,38 @@ class MemberDetails extends Component {
         </p>
         <div className="">
             <form className="m-4 flex">
-                <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="book title" type="text"
-                value={this.state.name} name="name" onChange={this.handleInputChange}/>
-                <button className="px-8 rounded-r-lg bg-green-400  text-gray-800 font-bold p-4 uppercase border-green-500 border-t border-b border-r" type="submit"
-                disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Go</button>
+              {/* book name */}
+              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="book title" type="text"
+              value={this.state.name} name="name" onChange={this.handleInputChange}/>
+              {/* book author */}
+              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="book author" type="text"
+              value={this.state.author} name="author" onChange={this.handleInputChange}/>
+              {/* book audioDuration */}
+              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="audio duration" type="text"
+              value={this.state.audioDuration} name="audioDuration" onChange={this.handleInputChange}/>
+              {/* book textDuration */}
+              <input className="rounded-l-lg p-4 border-t mr-0 border-b border-l text-gray-800 border-gray-200 bg-white" placeholder="text duration" type="text"
+              value={this.state.textDuration} name="textDuration" onChange={this.handleInputChange}/>
+
+
+              <button className="px-8 rounded-r-lg bg-green-400  text-gray-800 font-bold p-4 uppercase border-green-500 border-t border-b border-r" type="submit"
+              disabled={!(this.state.name)} onClick={this.handleFormSubmit}>Go</button>
             </form>
         </div>
 
-        <div id="books-go-here" className="rounded-lg border-blue-500 inline-block">
+        <div id="books-go-here" className="rounded-lg border-blue-500 inline-block flex mb-4">
             {this.state.book.length ? (
               <List>
                 {this.state.book.map(book => (
                   <ListItem key={book._id}>
-                    <a href={"/books/" + book._id}>
+                    {/* <a href={"/books/" + book._id}> */}
                       <strong>
                         book ID: {book._id}
                         <br/>
                         book Name: {book.title}
                       </strong>
-                    </a>
+                    {/* </a> */}
+
                     <div className="flex items-center justify-left">
                     <div className="m-3">
                       <button className="bg-white text-gray-800 font-bold rounded border-b-2 border-red-500 hover:border-red-600 hover:bg-red-500 hover:text-white shadow-md py-2 px-6 inline-flex items-center"
@@ -95,6 +116,7 @@ class MemberDetails extends Component {
                         </svg>
                         </button>
                       </div>
+  
                     </div>
                   </ListItem>
                 ))}
@@ -102,7 +124,13 @@ class MemberDetails extends Component {
             ) : (
               <h3>No Results to Display</h3>
             )}
+
+
             </div>
+            {/* <div className="w-1/2 items-center justify-right bg-gray-500 px-8">
+                <p>Enter in book details here:</p>
+            </div> */}
+
 
             <Link to="/group">
             <div className="flex items-center justify-left">

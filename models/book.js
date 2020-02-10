@@ -9,8 +9,8 @@ var bookSchema = new Schema({
     // author of the book should be required
     // i am setting to false for init testing
     author: { 
-    type: String,
-    required: false 
+        type: String,
+        required: false 
     },
     // title will be required
     title: {
@@ -29,6 +29,10 @@ var bookSchema = new Schema({
         type: Number,
         required: false
     },
+    created: {
+        type: Date, 
+        default: Date.now
+    }
 });
 
 // This creates our model from the above schema, using mongoose's model method
