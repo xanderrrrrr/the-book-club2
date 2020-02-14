@@ -1,4 +1,4 @@
-# Project Title: NFL Pick 'Em
+# Project Title: The Book Club
 
 ## Google Slides Presentation
 https://docs.google.com/presentation/d/1GyRAKJ_YQHUyupjdvgFU1bgViLGDS2LaVvHgOiXd5IA/edit?usp=sharing
